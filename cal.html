@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <style>
+    body {
+  background-color: #023047;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.calculator {
+  background-color:#023047;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px #1b1b1a;
+  
+}
+
+.display {
+  width: 100%;
+  height: 50px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: right;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color:#FFB703;
+  color: white;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+button {
+  padding: 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  background-color: #FB8500;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #FFB703;
+}
+
+.clear {
+  grid-column: span 4;
+  background-color: #023047;
+  border: none;
+}
+@media (max-width: 400px) {
+  .calculator {
+    max-width: 15px;
+    padding: 1em;
+  }
+  button {
+    max-width: 15px;
+    padding: 1em;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <input type="text" class="display" disabled />
+    <div class="buttons">
+      <button>7</button><button>8</button><button>9</button><button>/</button>
+      <button>4</button><button>5</button><button>6</button><button>*</button>
+      <button>1</button><button>2</button><button>3</button><button>-</button>
+      <button>0</button><button>.</button><button>=</button><button>+</button>
+      <button class="clear">C</button>
+    </div>
+  </div>
+  <script>
+    const display = document.querySelector('.display');
+const buttons = document.querySelectorAll('button');
+
+let currentInput = '';
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const value = button.textContent;
+
+    if (value === 'C') {
+      currentInput = '';
+    } else if (value === '=') {
+      try {
+        currentInput = eval(currentInput).toString();
+      } catch {
+        currentInput = 'Error';
+      }
+    } else {
+      currentInput += value;
+    }
+
+    display.value = currentInput;
+  });
+});
+
+  </script>
+</body>
+</html>
